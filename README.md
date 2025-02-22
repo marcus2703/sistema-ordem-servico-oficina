@@ -41,3 +41,4 @@
 - [Casos de Uso](casos_uso.md)
 - [Diagrama de Classes](diagrama_classe.md)
 - [Diagrama de Sequência](diagrama_sequencia.md)
+- [Modelo Banco de Dados Conceitual](modelagem_conceitual.md)

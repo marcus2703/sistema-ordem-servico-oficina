@@ -16,7 +16,7 @@ Os casos de uso são utilizados para:
 
 ## Índice de Casos de Uso
 
-1. [Cadastro de Clientes](###caso-de-uso-1-cadastro-de-clientes)
+1. [Cadastro de Clientes](#caso-de-uso-1-cadastro-de-clientes)
 2. [Cadastro de Veículos](#caso-de-uso-2-cadastro-de-veículos)
 3. [Cadastro de Mecânicos](#caso-de-uso-3-cadastro-de-mecânicos)
 4. [Criação de Ordens de Serviço](#caso-de-uso-4-criação-de-ordens-de-serviço-os)
@@ -44,7 +44,7 @@ Os casos de uso são utilizados para:
 
 ```mermaid
 stateDiagram-v2
-    Atendente: ((😊))
+    Atendente: 😊 Atendente
     Sistema: Sistema
     CadastroCliente: Cadastrar Cliente
     
@@ -70,7 +70,7 @@ stateDiagram-v2
 
 ```mermaid
 stateDiagram-v2
-    Atendente: ((😊))
+    Atendente: 😊 Atendente
     Sistema: Sistema
     CadastroVeiculo: Cadastrar Veículo
     AssociarCliente: Associar Cliente
@@ -97,7 +97,7 @@ stateDiagram-v2
 
 ```mermaid
 stateDiagram-v2
-    Gerente: ((👨‍💼))
+    Gerente: 👨‍💼 Gerente
     Sistema: Sistema
     CadastroMecanico: Cadastrar Mecânico
     
@@ -123,7 +123,7 @@ stateDiagram-v2
 
 ```mermaid
 stateDiagram-v2
-    Atendente: ((😊))
+    Atendente: 😊 Atendente
     Sistema: Sistema
     CriarOS: Criar OS
     AssociarVeiculo: Associar Veículo
@@ -152,7 +152,7 @@ stateDiagram-v2
 
 ```mermaid
 stateDiagram-v2
-    Gerente: ((👨‍💼))
+    Gerente: 👨‍💼 Gerente
     Sistema: Sistema
     DesignarVeiculo: Designar Veículo
     SelecionarEquipe: Selecionar Equipe
@@ -178,7 +178,7 @@ stateDiagram-v2
 
 ```mermaid
 stateDiagram-v2
-    Atendente: ((😊))
+    Atendente: 😊 Atendente
     Sistema: Sistema
     ConsultarTabela: Consultar Tabela
     ExibirValor: Exibir Valor
@@ -205,7 +205,7 @@ stateDiagram-v2
 
 ```mermaid
 stateDiagram-v2
-    Atendente: ((😊))
+    Atendente: 😊 Atendente
     Sistema: Sistema
     IncluirItens: Incluir Itens
     CalcularTotal: Calcular Total
@@ -234,8 +234,8 @@ stateDiagram-v2
 
 ```mermaid
 stateDiagram-v2
-    Atendente: ((😊))
-    Cliente: ((👤))
+    Atendente: 😊 Atendente
+    Cliente: 👤 Cliente
     Sistema: Sistema
     ApresentarOS: Apresentar OS
     AutorizarServico: Autorizar Serviço
@@ -264,7 +264,7 @@ stateDiagram-v2
 
 ```mermaid
 stateDiagram-v2
-    Mecanico: ((🔧))
+    Mecanico: 🔧 Mecânico
     Sistema: Sistema
     SelecionarOS: Selecionar OS
     AtualizarStatus: Atualizar Status
@@ -292,7 +292,7 @@ stateDiagram-v2
 
 ```mermaid
 stateDiagram-v2
-    Atendente: ((😊))
+    Atendente: 😊 Atendente
     Sistema: Sistema
     EntradaVeiculo: Entrada Veículo
     SelecionarServico: Selecionar Serviço
@@ -321,7 +321,7 @@ stateDiagram-v2
 
 ```mermaid
 stateDiagram-v2
-    Atendente: ((😊))
+    Atendente: 😊 Atendente
     Sistema: Sistema
     AcessarOS: Acessar OS
     IncluirServicos: Incluir Serviços
@@ -348,7 +348,7 @@ stateDiagram-v2
 
 ```mermaid
 stateDiagram-v2
-    Atendente: ((😊))
+    Atendente: 😊 Atendente
     Sistema: Sistema
     AcessarOS: Acessar OS
     IncluirPecas: Incluir Peças
@@ -375,7 +375,7 @@ stateDiagram-v2
 
 ```mermaid
 stateDiagram-v2
-    Atendente: ((😊))
+    Atendente: 😊 Atendente
     Sistema: Sistema
     AcessarCadastro: Acessar Cadastro
     AssociarVeiculos: Associar Veículos

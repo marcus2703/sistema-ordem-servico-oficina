@@ -28,7 +28,8 @@ Os casos de uso são utilizados para:
 10. [Entrada de Veículos](#caso-de-uso-10-entrada-de-veículos-para-conserto-ou-revisão)
 11. [Inclusão de Serviços na OS](#caso-de-uso-11-inclusão-de-vários-serviços-na-os)
 12. [Inclusão de Peças na OS](#caso-de-uso-12-inclusão-de-vários-tipos-de-peças-na-os)
-13. [Associação de Veículos ao Cliente](#caso-de-uso-13-associação-de-vários-veículos-a-um-cliente)
+13. [Associação de Veículos ao Cliente](#caso-de-uso-13-associação-de-vários-veículos-ao-cliente)
+
 
 ### Caso de Uso 1: Cadastro de Clientes
 

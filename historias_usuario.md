@@ -1,55 +1,89 @@
-# Histórias de Usuário (User Stories)
+# Histórias de Usuário
 
-## Histórias
+## Introdução
 
-### Cadastro de Clientes
+As histórias de usuário são descrições curtas e simples de uma funcionalidade do sistema, contadas sob a perspectiva do usuário. Elas ajudam a entender como os diferentes atores interagem com o sistema e quais são suas necessidades principais.
 
-*Como um usuário, eu quero cadastrar clientes no sistema para que eu possa gerenciar suas informações e veículos.*
+### Utilização
 
-### Cadastro de Veículos
+As histórias de usuário são utilizadas para:
 
-*Como um usuário, eu quero cadastrar veículos no sistema para que eu possa associá-los aos clientes e ordens de serviço.*
+1. Capturar os requisitos do sistema do ponto de vista do usuário
+2. Definir o escopo das funcionalidades
+3. Planejar as entregas do projeto
+4. Estabelecer prioridades de desenvolvimento
+5. Facilitar a comunicação entre stakeholders
 
-### Cadastro de Mecânicos com Especialidade
+### Diagrama de Histórias de Usuário
 
-*Como um usuário, eu quero cadastrar mecânicos com uma especialidade no sistema para que eu possa designá-los a equipes e ordens de serviço específicas.*
+#### Histórias do Cliente
 
-### Criação de Ordens de Serviço (OS)
+```mermaid
+graph LR
+    Cliente[("👤 Cliente")]
+    US1["Como Cliente<br/>Quero solicitar serviços<br/>Para manter meu veículo"]
+    US2["Como Cliente<br/>Quero acompanhar o status do serviço<br/>Para saber quando estará pronto"]
+    US3["Como Cliente<br/>Quero receber orçamentos<br/>Para aprovar os serviços"]
 
-*Como um usuário, eu quero criar ordens de serviço com data de emissão, valor, status e data de conclusão para gerenciar os serviços realizados na oficina.*
+    Cliente --> US1
+    Cliente --> US2
+    Cliente --> US3
 
-### Designação de Veículos a Equipes de Mecânicos
+    classDef default fill:#f9f9f9,stroke:#333,stroke-width:2px;
+    classDef ator fill:#4A4A4A,stroke:#333,stroke-width:2px,color:white;
+    class Cliente ator;
+```
 
-*Como um usuário, eu quero designar veículos a equipes de mecânicos para que os serviços possam ser realizados de forma organizada.*
+#### Histórias do Atendente
 
-### Consulta de Tabela de Referência de Mão-de-Obra
+```mermaid
+graph LR
+    Atendente[("👨‍💼 Atendente")]
+    US4["Como Atendente<br/>Quero cadastrar clientes<br/>Para manter registro atualizado"]
+    US5["Como Atendente<br/>Quero gerar ordens de serviço<br/>Para controlar os trabalhos"]
+    US6["Como Atendente<br/>Quero registrar pagamentos<br/>Para controle financeiro"]
 
-*Como um usuário, eu quero consultar uma tabela de referência de mão-de-obra para calcular o valor dos serviços a serem realizados.*
+    Atendente --> US4
+    Atendente --> US5
+    Atendente --> US6
 
-### Cálculo do Valor Total da OS
+    classDef default fill:#f9f9f9,stroke:#333,stroke-width:2px;
+    classDef ator fill:#4A4A4A,stroke:#333,stroke-width:2px,color:white;
+    class Atendente ator;
+```
 
-*Como um usuário, eu quero calcular o valor total da ordem de serviço, incluindo serviços e peças, para informar o cliente.*
+#### Histórias do Mecânico
 
-### Autorização de Execução dos Serviços pelo Cliente
+```mermaid
+graph LR
+    Mecanico[("🔧 Mecânico")]
+    US7["Como Mecânico<br/>Quero registrar diagnósticos<br/>Para documentar problemas"]
+    US8["Como Mecânico<br/>Quero atualizar status dos serviços<br/>Para informar o andamento"]
+    US9["Como Mecânico<br/>Quero listar peças necessárias<br/>Para realizar os reparos"]
 
-*Como um usuário, eu quero obter a autorização do cliente para executar os serviços para que possamos iniciar os trabalhos.*
+    Mecanico --> US7
+    Mecanico --> US8
+    Mecanico --> US9
 
-### Atualização do Status da OS
+    classDef default fill:#f9f9f9,stroke:#333,stroke-width:2px;
+    classDef ator fill:#4A4A4A,stroke:#333,stroke-width:2px,color:white;
+    class Mecanico ator;
+```
 
-*Como um usuário, eu quero atualizar o status da ordem de serviço conforme o progresso dos serviços para manter o cliente informado.*
+#### Histórias do Gerente
 
-### Entrada de Veículos para Conserto ou Revisão
+```mermaid
+graph LR
+    Gerente[("👨‍💼 Gerente")]
+    US10["Como Gerente<br/>Quero gerar relatórios<br/>Para análise do negócio"]
+    US11["Como Gerente<br/>Quero controlar estoque<br/>Para gestão de peças"]
+    US12["Como Gerente<br/>Quero gerenciar equipe<br/>Para otimizar trabalhos"]
 
-*Como um usuário, eu quero registrar a entrada de veículos para conserto ou revisão na oficina para que possamos gerenciar os serviços adequados.*
+    Gerente --> US10
+    Gerente --> US11
+    Gerente --> US12
 
-### Inclusão de Vários Serviços na OS
-
-*Como um usuário, eu quero incluir vários serviços em uma ordem de serviço para atender todas as necessidades do cliente.*
-
-### Inclusão de Vários Tipos de Peças na OS
-
-*Como um usuário, eu quero incluir vários tipos de peças em uma ordem de serviço para realizar os consertos necessários.*
-
-### Associação de Vários Veículos a um Cliente
-
-*Como um usuário, eu quero associar vários veículos a um cliente para que possamos gerenciar adequadamente seus serviços.*
+    classDef default fill:#f9f9f9,stroke:#333,stroke-width:2px;
+    classDef ator fill:#4A4A4A,stroke:#333,stroke-width:2px,color:white;
+    class Gerente ator;
+```

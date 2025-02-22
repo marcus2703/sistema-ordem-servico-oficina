@@ -164,6 +164,9 @@ erDiagram
 
 ```mermaid
 erDiagram
+    %% Hierarquia de Pessoa
+    PESSOA ||--|{ CLIENTE : "é"
+    PESSOA ||--|{ FUNCIONARIO : "é"
     PESSOA {
         int id_pessoa PK
         string nome
@@ -174,8 +177,7 @@ erDiagram
         string tipo_pessoa
     }
     
-    CLIENTE ||--o{ VEICULO : possui
-    CLIENTE }|--|| PESSOA : "é"
+    CLIENTE ||--o{ VEICULO : "possui"
     CLIENTE {
         int id_cliente PK
         int id_pessoa FK
@@ -183,7 +185,9 @@ erDiagram
         string preferencias
     }
     
-    FUNCIONARIO }|--|| PESSOA : "é"
+    %% Hierarquia de Funcionário
+    FUNCIONARIO ||--|{ MECANICO : "é"
+    FUNCIONARIO ||--|{ ATENDENTE : "é"
     FUNCIONARIO {
         int id_funcionario PK
         int id_pessoa FK
@@ -193,7 +197,8 @@ erDiagram
         string turno
     }
 
-    ESPECIALIDADE ||--|{ MECANICO_ESPECIALIDADE : possui
+    %% Relacionamentos de Especialidade
+    ESPECIALIDADE ||--|{ MECANICO_ESPECIALIDADE : "possui"
     ESPECIALIDADE {
         int id_especialidade PK
         string nome
@@ -203,8 +208,8 @@ erDiagram
         int tempo_medio_servicos
     }
     
-    MECANICO }|--|| FUNCIONARIO : "é"
-    MECANICO ||--|{ MECANICO_ESPECIALIDADE : possui
+    MECANICO ||--|{ MECANICO_ESPECIALIDADE : "possui"
+    MECANICO ||--o{ EQUIPE : "compõe"
     MECANICO {
         int id_mecanico PK
         int id_funcionario FK
@@ -221,7 +226,7 @@ erDiagram
         boolean principal
     }
     
-    ATENDENTE }|--|| FUNCIONARIO : "é"
+    ATENDENTE ||--o{ ORDEM_SERVICO : "registra"
     ATENDENTE {
         int id_atendente PK
         int id_funcionario FK
@@ -229,7 +234,7 @@ erDiagram
         string nivel_acesso
     }
     
-    VEICULO ||--o{ ORDEM_SERVICO : gera
+    VEICULO ||--o{ ORDEM_SERVICO : "gera"
     VEICULO {
         int id_veiculo PK
         string placa
@@ -243,48 +248,14 @@ erDiagram
         int id_cliente FK
     }
     
-    SERVICO {
-        int id_servico PK
-        string descricao
-        decimal valor_padrao
-        string tipo
-        int tempo_estimado
-        string nivel_complexidade
-    }
-    
-    SERVICO_REVISAO }|--|| SERVICO : "é"
-    SERVICO_REVISAO {
-        int id_servico_revisao PK
-        int id_servico FK
-        int quilometragem
-        string itens_revisao
-        string periodicidade
-    }
-    
-    SERVICO_REPARO }|--|| SERVICO : "é"
-    SERVICO_REPARO {
-        int id_servico_reparo PK
-        int id_servico FK
-        string tipo_reparo
-        string area_veiculo
-        string ferramentas_necessarias
-    }
-    
-    PECA {
-        int id_peca PK
+    EQUIPE ||--o{ ORDEM_SERVICO : "atende"
+    EQUIPE {
+        int id_equipe PK
         string nome
-        string codigo
-        string fabricante
-        string categoria
-        string aplicacao
-        decimal valor_unitario
-        int quantidade_estoque
-        int estoque_minimo
-        string localizacao_estoque
+        string descricao
     }
-    
-    ORDEM_SERVICO ||--|{ ITEM_SERVICO : possui
-    ORDEM_SERVICO ||--|{ ITEM_PECA : possui
+
+    ORDEM_SERVICO ||--|| ORCAMENTO : "possui"
     ORDEM_SERVICO {
         int id_os PK
         date data_emissao
@@ -298,35 +269,107 @@ erDiagram
         int id_equipe FK
         int id_atendente FK
     }
+
+    ORCAMENTO {
+        int id_orcamento PK
+        int id_os FK
+        date data_orcamento
+        decimal valor_total
+        string status
+    }
+
+    %% Hierarquia de Serviço
+    SERVICO ||--|{ SERVICO_REVISAO : "é"
+    SERVICO ||--|{ SERVICO_REPARO : "é"
+    SERVICO ||--|{ ITEM_SERVICO : "contém"
+    SERVICO {
+        int id_servico PK
+        string descricao
+        decimal valor_padrao
+        string tipo
+        int tempo_estimado
+        string nivel_complexidade
+    }
+    
+    SERVICO_REVISAO {
+        int id_servico_revisao PK
+        int id_servico FK
+        int quilometragem
+        string itens_revisao
+        string periodicidade
+    }
+    
+    SERVICO_REPARO {
+        int id_servico_reparo PK
+        int id_servico FK
+        string tipo_reparo
+        string area_veiculo
+        string ferramentas_necessarias
+    }
+    
+    %% Relacionamentos com OS
+    ORDEM_SERVICO ||--|{ ITEM_SERVICO : "possui"
+    ORDEM_SERVICO ||--|{ ITEM_PECA : "possui"
+    
+    ITEM_SERVICO {
+        int id_item_servico PK
+        int id_os FK
+        int id_servico FK
+        decimal valor_cobrado
+    }
+
+    PECA ||--|{ ITEM_PECA : "utiliza"
+    PECA {
+        int id_peca PK
+        string nome
+        string codigo
+        string fabricante
+        string categoria
+        string aplicacao
+        decimal valor_unitario
+        int quantidade_estoque
+        int estoque_minimo
+        string localizacao_estoque
+    }
+    
+    ITEM_PECA {
+        int id_item_peca PK
+        int id_os FK
+        int id_peca FK
+        int quantidade
+        decimal valor_unitario
+    }
 ```
 
-## Descrição das Especializações
+## Descrição dos Relacionamentos Principais
 
-### 1. Especialização de PESSOA
-- **Entidade Genérica:** PESSOA
-- **Especializações:** 
-  - CLIENTE
-  - FUNCIONARIO (que por sua vez tem suas próprias especializações)
+1. **Hierarquia de PESSOA**
+   - PESSOA → CLIENTE (especialização)
+   - PESSOA → FUNCIONARIO (especialização)
 
-### 2. Especialização de FUNCIONARIO
-- **Entidade Genérica:** FUNCIONARIO
-- **Especializações:**
-  - MECANICO (com relação com ESPECIALIDADE)
-  - ATENDENTE
+2. **Hierarquia de FUNCIONARIO**
+   - FUNCIONARIO → MECANICO (especialização)
+   - FUNCIONARIO → ATENDENTE (especialização)
 
-### 3. Especialização de SERVICO
-- **Entidade Genérica:** SERVICO
-- **Especializações:**
-  - SERVICO_REVISAO
-  - SERVICO_REPARO
+3. **Hierarquia de SERVICO**
+   - SERVICO → SERVICO_REVISAO (especialização)
+   - SERVICO → SERVICO_REPARO (especialização)
 
-### 4. Estrutura de ESPECIALIDADE
-- **Entidade:** ESPECIALIDADE
-- **Relacionamento:** N:N com MECANICO através de MECANICO_ESPECIALIDADE
-- **Benefícios:**
-  - Melhor controle das competências dos mecânicos
-  - Histórico de certificações
-  - Gestão de níveis de proficiência
+4. **Relacionamentos com ORDEM_SERVICO**
+   - VEICULO → ORDEM_SERVICO (1:N)
+   - EQUIPE → ORDEM_SERVICO (1:N)
+   - ATENDENTE → ORDEM_SERVICO (1:N)
+   - ORDEM_SERVICO → ORCAMENTO (1:1)
+   - ORDEM_SERVICO → ITEM_SERVICO (1:N)
+   - ORDEM_SERVICO → ITEM_PECA (1:N)
+
+5. **Relacionamentos de MECANICO**
+   - MECANICO ↔ ESPECIALIDADE (N:N através de MECANICO_ESPECIALIDADE)
+   - MECANICO → EQUIPE (N:N)
+
+6. **Relacionamentos de PECA e SERVICO**
+   - PECA → ITEM_PECA (1:N)
+   - SERVICO → ITEM_SERVICO (1:N)
 
 ## Benefícios das Especializações
 

@@ -19,17 +19,14 @@ Os casos de uso são utilizados para:
 1. [Cadastro de Clientes](#caso-de-uso-1-cadastro-de-clientes)
 2. [Cadastro de Veículos](#caso-de-uso-2-cadastro-de-veículos)
 3. [Cadastro de Mecânicos](#caso-de-uso-3-cadastro-de-mecânicos)
-4. [Criação de Ordens de Serviço](#caso-de-uso-4-criação-de-ordens-de-serviço-os)
-5. [Designação de Veículos a Equipes](#caso-de-uso-5-designação-de-veículos-a-equipes-de-mecânicos)
-6. [Consulta de Tabela de Referência](#caso-de-uso-6-consulta-de-tabela-de-referência-de-mão-de-obra)
-7. [Cálculo do Valor Total da OS](#caso-de-uso-7-cálculo-do-valor-total-da-os)
-8. [Autorização de Execução dos Serviços](#caso-de-uso-8-autorização-de-execução-dos-serviços-pelo-cliente)
-9. [Atualização do Status da OS](#caso-de-uso-9-atualização-do-status-da-os)
-10. [Entrada de Veículos](#caso-de-uso-10-entrada-de-veículos-para-conserto-ou-revisão)
-11. [Inclusão de Serviços na OS](#caso-de-uso-11-inclusão-de-vários-serviços-na-os)
-12. [Inclusão de Peças na OS](#caso-de-uso-12-inclusão-de-vários-tipos-de-peças-na-os)
-13. [Associação de Veículos ao Cliente](#caso-de-uso-13-associação-de-vários-veículos-ao-cliente)
-
+4. [Entrada de Veículos](#caso-de-uso-4-entrada-de-veículos-para-conserto-ou-revisão)
+5. [Criação de OS](#caso-de-uso-5-criação-de-ordens-de-serviço-os)
+6. [Designação de Veículos a Equipes](#caso-de-uso-6-designação-de-veículos-a-equipes-de-mecânicos)
+7. [Orçamento](#caso-de-uso-7-orçamento)
+8. [Consulta Tabela de Referência](#caso-de-uso-8-consulta-de-tabela-de-referência-de-mão-de-obra)
+9. [Cálculo Valor Total](#caso-de-uso-9-cálculo-do-valor-total-da-os)
+10. [Autorização dos Serviços](#caso-de-uso-10-autorização-de-execução-dos-serviços-pelo-cliente)
+11. [Atualização Status da OS](#caso-de-uso-11-atualização-do-status-da-os)
 
 ### Caso de Uso 1: Cadastro de Clientes
 
@@ -54,7 +51,7 @@ stateDiagram-v2
     Sistema --> Atendente: Confirma cadastro
 ```
 
-[🔝 Voltar ao topo](## Índice de Casos de Uso)
+[🔝 Voltar ao topo](#casos-de-uso)
 
 ### Caso de Uso 2: Cadastro de Veículos
 
@@ -109,176 +106,7 @@ stateDiagram-v2
 
 [🔝 Voltar ao topo](#casos-de-uso)
 
-### Caso de Uso 4: Criação de Ordens de Serviço (OS)
-
-**Ator Principal:** 😊 Atendente
-
-**Fluxo Principal:**
-1. O atendente acessa a funcionalidade de criação de ordens de serviço
-2. O atendente preenche as informações da OS (número, data de emissão, valor, status, data de conclusão, etc.)
-3. O atendente associa a OS a um veículo e a uma equipe de mecânicos
-4. O atendente salva a OS
-5. O sistema confirma a criação da OS
-
-#### Diagrama do Caso de Uso
-
-```mermaid
-stateDiagram-v2
-    Atendente: 😊 Atendente
-    Sistema: Sistema
-    CriarOS: Criar OS
-    AssociarVeiculo: Associar Veículo
-    AssociarEquipe: Associar Equipe
-    
-    Atendente --> CriarOS: Acessa
-    CriarOS --> AssociarVeiculo: Vincula
-    AssociarVeiculo --> AssociarEquipe: Vincula
-    AssociarEquipe --> Sistema: Registra dados
-    Sistema --> Atendente: Confirma criação
-```
-
-[🔝 Voltar ao topo](#casos-de-uso)
-
-### Caso de Uso 5: Designação de Veículos a Equipes de Mecânicos
-
-**Ator Principal:** 👨‍💼 Gerente
-
-**Fluxo Principal:**
-1. O gerente acessa a funcionalidade de designação de veículos
-2. O gerente seleciona o veículo e a equipe de mecânicos
-3. O gerente salva a designação
-4. O sistema confirma a designação
-
-#### Diagrama do Caso de Uso
-
-```mermaid
-stateDiagram-v2
-    Gerente: 👨‍💼 Gerente
-    Sistema: Sistema
-    DesignarVeiculo: Designar Veículo
-    SelecionarEquipe: Selecionar Equipe
-    
-    Gerente --> DesignarVeiculo: Acessa
-    DesignarVeiculo --> SelecionarEquipe: Seleciona
-    SelecionarEquipe --> Sistema: Registra dados
-    Sistema --> Gerente: Confirma designação
-```
-
-[🔝 Voltar ao topo](#casos-de-uso)
-
-### Caso de Uso 6: Consulta de Tabela de Referência de Mão-de-Obra
-
-**Ator Principal:** 😊 Atendente
-
-**Fluxo Principal:**
-1. O atendente acessa a funcionalidade de consulta de tabela de referência de mão-de-obra
-2. O atendente busca o serviço na tabela
-3. O sistema exibe o valor do serviço consultado
-
-#### Diagrama do Caso de Uso
-
-```mermaid
-stateDiagram-v2
-    Atendente: 😊 Atendente
-    Sistema: Sistema
-    ConsultarTabela: Consultar Tabela
-    ExibirValor: Exibir Valor
-    
-    Atendente --> ConsultarTabela: Acessa
-    ConsultarTabela --> Sistema: Busca
-    Sistema --> ExibirValor: Processa
-    ExibirValor --> Atendente: Mostra resultado
-```
-
-[🔝 Voltar ao topo](#casos-de-uso)
-
-### Caso de Uso 7: Cálculo do Valor Total da OS
-
-**Ator Principal:** 😊 Atendente
-
-**Fluxo Principal:**
-1. O atendente acessa a funcionalidade de cálculo do valor total da OS
-2. O atendente inclui os serviços e peças na OS
-3. O sistema calcula o valor total da OS
-4. O sistema exibe o valor total para o atendente
-
-#### Diagrama do Caso de Uso
-
-```mermaid
-stateDiagram-v2
-    Atendente: 😊 Atendente
-    Sistema: Sistema
-    IncluirItens: Incluir Itens
-    CalcularTotal: Calcular Total
-    
-    Atendente --> IncluirItens: Acessa
-    IncluirItens --> Sistema: Envia dados
-    Sistema --> CalcularTotal: Processa
-    CalcularTotal --> Atendente: Exibe total
-```
-
-[🔝 Voltar ao topo](#casos-de-uso)
-
-### Caso de Uso 8: Autorização de Execução dos Serviços pelo Cliente
-
-**Ator Principal:** 😊 Atendente
-**Ator Secundário:** 👤 Cliente
-
-**Fluxo Principal:**
-1. O atendente acessa a funcionalidade de autorização de serviços
-2. O atendente apresenta a OS com os valores ao cliente
-3. O cliente autoriza a execução dos serviços
-4. O atendente registra a autorização
-5. O sistema confirma a autorização
-
-#### Diagrama do Caso de Uso
-
-```mermaid
-stateDiagram-v2
-    Atendente: 😊 Atendente
-    Cliente: 👤 Cliente
-    Sistema: Sistema
-    ApresentarOS: Apresentar OS
-    AutorizarServico: Autorizar Serviço
-    
-    Atendente --> ApresentarOS: Acessa
-    ApresentarOS --> Cliente: Apresenta
-    Cliente --> AutorizarServico: Autoriza
-    AutorizarServico --> Sistema: Registra
-    Sistema --> Atendente: Confirma
-```
-
-[🔝 Voltar ao topo](#casos-de-uso)
-
-### Caso de Uso 9: Atualização do Status da OS
-
-**Ator Principal:** 🔧 Mecânico
-
-**Fluxo Principal:**
-1. O mecânico acessa a funcionalidade de atualização de status da OS
-2. O mecânico seleciona a OS a ser atualizada
-3. O mecânico atualiza o status conforme o progresso dos serviços
-4. O mecânico salva as alterações
-5. O sistema confirma a atualização do status
-
-#### Diagrama do Caso de Uso
-
-```mermaid
-stateDiagram-v2
-    Mecanico: 🔧 Mecânico
-    Sistema: Sistema
-    SelecionarOS: Selecionar OS
-    AtualizarStatus: Atualizar Status
-    
-    Mecanico --> SelecionarOS: Acessa
-    SelecionarOS --> AtualizarStatus: Seleciona
-    AtualizarStatus --> Sistema: Registra
-    Sistema --> Mecanico: Confirma
-```
-
-[🔝 Voltar ao topo](#casos-de-uso)
-
-### Caso de Uso 10: Entrada de Veículos para Conserto ou Revisão
+### Caso de Uso 4: Entrada de Veículos para Conserto ou Revisão
 
 **Ator Principal:** 😊 Atendente
 
@@ -308,15 +136,16 @@ stateDiagram-v2
 
 [🔝 Voltar ao topo](#casos-de-uso)
 
-### Caso de Uso 11: Inclusão de Vários Serviços na OS
+### Caso de Uso 5: Criação de Ordens de Serviço (OS)
 
 **Ator Principal:** 😊 Atendente
 
 **Fluxo Principal:**
 1. O atendente acessa a funcionalidade de criação de ordens de serviço
-2. O atendente inclui vários serviços na OS
-3. O atendente salva a OS
-4. O sistema confirma a criação da OS com os serviços incluídos
+2. O atendente preenche as informações da OS (data de emissão, status)
+3. O atendente associa a OS a um veículo
+4. O atendente salva a OS
+5. O sistema confirma a criação da OS
 
 #### Diagrama do Caso de Uso
 
@@ -324,53 +153,80 @@ stateDiagram-v2
 stateDiagram-v2
     Atendente: 😊 Atendente
     Sistema: Sistema
-    AcessarOS: Acessar OS
-    IncluirServicos: Incluir Serviços
+    CriarOS: Criar OS
+    AssociarVeiculo: Associar Veículo
     
-    Atendente --> AcessarOS: Acessa
-    AcessarOS --> IncluirServicos: Adiciona
-    IncluirServicos --> Sistema: Registra
-    Sistema --> Atendente: Confirma
+    Atendente --> CriarOS: Acessa
+    CriarOS --> AssociarVeiculo: Vincula
+    AssociarVeiculo --> Sistema: Registra dados
+    Sistema --> Atendente: Confirma criação
 ```
 
 [🔝 Voltar ao topo](#casos-de-uso)
 
-### Caso de Uso 12: Inclusão de Vários Tipos de Peças na OS
+### Caso de Uso 6: Designação de Veículos a Equipes de Mecânicos
 
-**Ator Principal:** 😊 Atendente
+**Ator Principal:** 👨‍💼 Gerente
 
 **Fluxo Principal:**
-1. O atendente acessa a funcionalidade de criação de ordens de serviço
-2. O atendente inclui vários tipos de peças na OS
-3. O atendente salva a OS
-4. O sistema confirma a criação da OS com as peças incluídas
+1. O gerente acessa a funcionalidade de designação de veículos
+2. O gerente seleciona o veículo e a equipe de mecânicos
+3. O gerente salva a designação
+4. O sistema confirma a designação
 
 #### Diagrama do Caso de Uso
 
 ```mermaid
 stateDiagram-v2
-    Atendente: 😊 Atendente
+    Gerente: 👨‍💼 Gerente
     Sistema: Sistema
-    AcessarOS: Acessar OS
-    IncluirPecas: Incluir Peças
+    DesignarVeiculo: Designar Veículo
+    SelecionarEquipe: Selecionar Equipe
     
-    Atendente --> AcessarOS: Acessa
-    AcessarOS --> IncluirPecas: Adiciona
-    IncluirPecas --> Sistema: Registra
-    Sistema --> Atendente: Confirma
+    Gerente --> DesignarVeiculo: Acessa
+    DesignarVeiculo --> SelecionarEquipe: Seleciona
+    SelecionarEquipe --> Sistema: Registra dados
+    Sistema --> Gerente: Confirma designação
 ```
 
 [🔝 Voltar ao topo](#casos-de-uso)
 
-### Caso de Uso 13: Associação de Vários Veículos ao Cliente
+### Caso de Uso 7: Orçamento
+
+**Ator Principal:** 🔧 Mecânico
+
+**Fluxo Principal:**
+1. O mecânico acessa a funcionalidade de orçamento na OS
+2. O mecânico seleciona a OS a ser orçada
+3. O mecânico informa os serviços e peças
+4. O mecânico salva as alterações
+5. O sistema confirma a atualização orçamento
+
+#### Diagrama do Caso de Uso
+
+```mermaid
+stateDiagram-v2
+    Mecanico: 🔧 Mecânico
+    Sistema: Sistema
+    AcessarOS: Acessar OS
+    InformarItens: Informar Itens
+    
+    Mecanico --> AcessarOS: Acessa
+    AcessarOS --> InformarItens: Preenche
+    InformarItens --> Sistema: Registra
+    Sistema --> Mecanico: Confirma
+```
+
+[🔝 Voltar ao topo](#casos-de-uso)
+
+### Caso de Uso 8: Consulta de Tabela de Referência de Mão-de-Obra
 
 **Ator Principal:** 😊 Atendente
 
 **Fluxo Principal:**
-1. O atendente acessa a funcionalidade de cadastro de veículos
-2. O atendente associa vários veículos a um cliente
-3. O atendente salva as informações
-4. O sistema confirma a associação dos veículos ao cliente
+1. O atendente acessa a funcionalidade de consulta de tabela de referência de mão-de-obra
+2. O atendente busca o serviço na tabela
+3. O sistema exibe o valor do serviço consultado
 
 #### Diagrama do Caso de Uso
 
@@ -378,13 +234,102 @@ stateDiagram-v2
 stateDiagram-v2
     Atendente: 😊 Atendente
     Sistema: Sistema
-    AcessarCadastro: Acessar Cadastro
-    AssociarVeiculos: Associar Veículos
+    ConsultarTabela: Consultar Tabela
+    ExibirValor: Exibir Valor
     
-    Atendente --> AcessarCadastro: Acessa
-    AcessarCadastro --> AssociarVeiculos: Vincula
-    AssociarVeiculos --> Sistema: Registra
-    Sistema --> Atendente: Confirma
+    Atendente --> ConsultarTabela: Acessa
+    ConsultarTabela --> Sistema: Busca
+    Sistema --> ExibirValor: Processa
+    ExibirValor --> Atendente: Mostra resultado
+```
+
+[🔝 Voltar ao topo](#casos-de-uso)
+
+### Caso de Uso 9: Cálculo do Valor Total da OS
+
+**Ator Principal:** 😊 Atendente
+
+**Fluxo Principal:**
+1. O atendente acessa a funcionalidade de cálculo do valor total da OS
+2. O atendente inclui as peças na OS
+3. O sistema calcula o valor total da OS
+4. O sistema exibe o valor total para o atendente
+
+#### Diagrama do Caso de Uso
+
+```mermaid
+stateDiagram-v2
+    Atendente: 😊 Atendente
+    Sistema: Sistema
+    CalcularTotal: Calcular Total
+    ExibirValor: Exibir Valor
+    
+    Atendente --> CalcularTotal: Acessa
+    CalcularTotal --> Sistema: Processa
+    Sistema --> ExibirValor: Calcula
+    ExibirValor --> Atendente: Mostra total
+```
+
+[🔝 Voltar ao topo](#casos-de-uso)
+
+### Caso de Uso 10: Autorização de Execução dos Serviços pelo Cliente
+
+**Ator Principal:** 😊 Atendente
+**Ator Secundário:** 👤 Cliente
+
+**Fluxo Principal:**
+1. O atendente acessa a funcionalidade de autorização de serviços
+2. O atendente apresenta a OS com os valores ao cliente
+3. O cliente autoriza a execução dos serviços
+4. O atendente registra a autorização
+5. O sistema confirma a autorização
+6. O sistema altera o status da OS para entrar na fila de atendimento
+
+#### Diagrama do Caso de Uso
+
+```mermaid
+stateDiagram-v2
+    Atendente: 😊 Atendente
+    Cliente: 👤 Cliente
+    Sistema: Sistema
+    ApresentarOS: Apresentar OS
+    AutorizarServico: Autorizar Serviço
+    AlterarStatus: Alterar Status
+    
+    Atendente --> ApresentarOS: Acessa
+    ApresentarOS --> Cliente: Apresenta
+    Cliente --> AutorizarServico: Autoriza
+    AutorizarServico --> Sistema: Registra
+    Sistema --> AlterarStatus: Atualiza
+    AlterarStatus --> Atendente: Confirma
+```
+
+[🔝 Voltar ao topo](#casos-de-uso)
+
+### Caso de Uso 11: Atualização do Status da OS
+
+**Ator Principal:** 🔧 Mecânico
+
+**Fluxo Principal:**
+1. O mecânico acessa a funcionalidade de atualização de status da OS
+2. O mecânico seleciona a OS a ser atualizada
+3. O mecânico atualiza o status conforme o progresso dos serviços
+4. O mecânico salva as alterações
+5. O sistema confirma a atualização do status
+
+#### Diagrama do Caso de Uso
+
+```mermaid
+stateDiagram-v2
+    Mecanico: 🔧 Mecânico
+    Sistema: Sistema
+    SelecionarOS: Selecionar OS
+    AtualizarStatus: Atualizar Status
+    
+    Mecanico --> SelecionarOS: Acessa
+    SelecionarOS --> AtualizarStatus: Seleciona
+    AtualizarStatus --> Sistema: Registra
+    Sistema --> Mecanico: Confirma
 ```
 
 [🔝 Voltar ao topo](#casos-de-uso)

@@ -163,10 +163,16 @@ erDiagram
 # Modelagem Conceitual do Banco de Dados - Com Especializações
 
 ```mermaid
+%%{init: {
+  'flowchart': {
+    'rankDir': 'TB',
+    'nodeSpacing': 50,
+    'rankSpacing': 50
+  }
+}}%%
 erDiagram
-    %% Hierarquia de Pessoa
-    PESSOA ||--|{ CLIENTE : "é"
-    PESSOA ||--|{ FUNCIONARIO : "é"
+    %% Grupo Pessoa/Cliente
+    PESSOA ||--|{ CLIENTE : "especializa"
     PESSOA {
         int id_pessoa PK
         string nome
@@ -177,17 +183,18 @@ erDiagram
         string tipo_pessoa
     }
     
-    CLIENTE ||--o{ VEICULO : "possui"
+    CLIENTE ||--o{ VEICULO : possui
     CLIENTE {
         int id_cliente PK
         int id_pessoa FK
         date data_cadastro
         string preferencias
     }
-    
-    %% Hierarquia de Funcionário
-    FUNCIONARIO ||--|{ MECANICO : "é"
-    FUNCIONARIO ||--|{ ATENDENTE : "é"
+
+    %% Grupo Funcionário e Especializações
+    PESSOA ||--|{ FUNCIONARIO : "especializa"
+    FUNCIONARIO ||--|{ MECANICO : "especializa"
+    FUNCIONARIO ||--|{ ATENDENTE : "especializa"
     FUNCIONARIO {
         int id_funcionario PK
         int id_pessoa FK
@@ -197,8 +204,58 @@ erDiagram
         string turno
     }
 
-    %% Relacionamentos de Especialidade
-    ESPECIALIDADE ||--|{ MECANICO_ESPECIALIDADE : "possui"
+    MECANICO {
+        int id_mecanico PK
+        int id_funcionario FK
+        string nivel_experiencia
+        string certificacoes
+    }
+
+    ATENDENTE {
+        int id_atendente PK
+        int id_funcionario FK
+        string setor
+        string nivel_acesso
+    }
+
+    %% Grupo Veículo e Especializações
+    MONTADORA ||--o{ MODELO : possui
+    MODELO ||--o{ VEICULO : "é do tipo"
+    MONTADORA {
+        int id_montadora PK
+        string nome
+        string pais_origem
+        string site_oficial
+    }
+
+    MODELO {
+        int id_modelo PK
+        int id_montadora FK
+        string nome
+        string tipo
+        string transmissao
+        string motorizacao
+        string combustivel
+        int quantidade_portas
+        string cod_fipe
+    }
+
+    VEICULO {
+        int id_veiculo PK
+        int id_cliente FK
+        int id_modelo FK
+        int id_montadora FK
+        string placa
+        int ano
+        string chassi
+        string cor
+        string tipo_veiculo
+        int quilometragem
+    }
+
+    %% Grupo Especialidade e Equipe
+    ESPECIALIDADE ||--|{ MECANICO_ESPECIALIDADE : possui
+    MECANICO ||--|{ MECANICO_ESPECIALIDADE : possui
     ESPECIALIDADE {
         int id_especialidade PK
         string nome
@@ -206,15 +263,6 @@ erDiagram
         string nivel_complexidade
         string certificacao_requerida
         int tempo_medio_servicos
-    }
-    
-    MECANICO ||--|{ MECANICO_ESPECIALIDADE : "possui"
-    MECANICO ||--o{ EQUIPE : "compõe"
-    MECANICO {
-        int id_mecanico PK
-        int id_funcionario FK
-        string nivel_experiencia
-        string certificacoes
     }
 
     MECANICO_ESPECIALIDADE {
@@ -225,63 +273,23 @@ erDiagram
         string nivel_proficiencia
         boolean principal
     }
-    
-    ATENDENTE ||--o{ ORDEM_SERVICO : "registra"
-    ATENDENTE {
-        int id_atendente PK
-        int id_funcionario FK
-        string setor
-        string nivel_acesso
-    }
-    
-    VEICULO ||--o{ ORDEM_SERVICO : "gera"
-    VEICULO {
-        int id_veiculo PK
-        string placa
-        string marca
-        string modelo
-        int ano
-        string chassi
-        string cor
-        string tipo_veiculo
-        int quilometragem
-        int id_cliente FK
-    }
-    
-    EQUIPE ||--o{ ORDEM_SERVICO : "atende"
+
+    EQUIPE ||--o{ EQUIPE_MECANICO : possui
+    MECANICO ||--o{ EQUIPE_MECANICO : pertence
     EQUIPE {
         int id_equipe PK
         string nome
         string descricao
     }
 
-    ORDEM_SERVICO ||--|| ORCAMENTO : "possui"
-    ORDEM_SERVICO {
-        int id_os PK
-        date data_emissao
-        string tipo_servico
-        string status
-        decimal valor_total
-        boolean autorizado
-        string observacoes
-        int quilometragem_atual
-        int id_veiculo FK
+    EQUIPE_MECANICO {
         int id_equipe FK
-        int id_atendente FK
+        int id_mecanico FK
     }
 
-    ORCAMENTO {
-        int id_orcamento PK
-        int id_os FK
-        date data_orcamento
-        decimal valor_total
-        string status
-    }
-
-    %% Hierarquia de Serviço
-    SERVICO ||--|{ SERVICO_REVISAO : "é"
-    SERVICO ||--|{ SERVICO_REPARO : "é"
-    SERVICO ||--|{ ITEM_SERVICO : "contém"
+    %% Grupo Serviço e Especializações
+    SERVICO ||--|{ SERVICO_REVISAO : "especializa"
+    SERVICO ||--|{ SERVICO_REPARO : "especializa"
     SERVICO {
         int id_servico PK
         string descricao
@@ -306,19 +314,39 @@ erDiagram
         string area_veiculo
         string ferramentas_necessarias
     }
-    
-    %% Relacionamentos com OS
-    ORDEM_SERVICO ||--|{ ITEM_SERVICO : "possui"
-    ORDEM_SERVICO ||--|{ ITEM_PECA : "possui"
-    
-    ITEM_SERVICO {
-        int id_item_servico PK
-        int id_os FK
-        int id_servico FK
-        decimal valor_cobrado
+
+    %% Grupo Ordem de Serviço e Relacionamentos
+    ORDEM_SERVICO ||--|| ORCAMENTO : possui
+    VEICULO ||--o{ ORDEM_SERVICO : gera
+    EQUIPE ||--o{ ORDEM_SERVICO : atende
+    ATENDENTE ||--o{ ORDEM_SERVICO : registra
+    ORDEM_SERVICO ||--|{ ITEM_SERVICO : contem
+    ORDEM_SERVICO ||--|{ ITEM_PECA : utiliza
+    ORDEM_SERVICO {
+        int id_os PK
+        datetime data_emissao
+        string tipo_servico
+        string status
+        decimal valor_total
+        boolean autorizado
+        string observacoes
+        int quilometragem_atual
+        int id_veiculo FK
+        int id_equipe FK
+        int id_atendente FK
     }
 
-    PECA ||--|{ ITEM_PECA : "utiliza"
+    ORCAMENTO {
+        int id_orcamento PK
+        int id_os FK
+        datetime data_orcamento
+        decimal valor_total
+        string status
+    }
+
+    %% Grupo Peças e Itens
+    PECA ||--|{ ITEM_PECA : compoe
+    SERVICO ||--|{ ITEM_SERVICO : compoe
     PECA {
         int id_peca PK
         string nome
@@ -338,6 +366,13 @@ erDiagram
         int id_peca FK
         int quantidade
         decimal valor_unitario
+    }
+
+    ITEM_SERVICO {
+        int id_item_servico PK
+        int id_os FK
+        int id_servico FK
+        decimal valor_cobrado
     }
 ```
 

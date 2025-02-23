@@ -43,3 +43,4 @@
 - [Diagrama de Sequência](diagrama_sequencia.md)
 - [Modelo Banco de Dados Conceitual](modelo_conceitual.md)
 - [Modelo Lógico de Banco de Dados](modelo_logico.md)
+- [Script Sql para criação do BD](create_database_oficina.sql)

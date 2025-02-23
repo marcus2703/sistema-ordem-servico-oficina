@@ -1,11 +1,27 @@
 # Modelagem Conceitual do Banco de Dados
 
 ## Introdução
+A modelagem conceitual é a primeira etapa no processo de design de um banco de dados, onde representamos as entidades do mundo real e seus relacionamentos de forma abstrata e independente de implementação. Este modelo serve como base para entender a estrutura dos dados e suas interações, sem se preocupar com detalhes técnicos específicos de um Sistema Gerenciador de Banco de Dados (SGBD).
 
-Este documento apresenta a modelagem conceitual do banco de dados para o Sistema de Controle e Gerenciamento de Execução de Ordens de Serviço em uma Oficina Mecânica.
+## Utilização
+A modelagem conceitual deve ser utilizada como:
+- Ferramenta de comunicação entre stakeholders e desenvolvedores
+- Base para validação dos requisitos do sistema
+- Guia para desenvolvimento do modelo lógico
+- Documentação de alto nível da estrutura de dados
+- Referência para futuras manutenções e evolução do sistema
+
+O diagrama apresentado utiliza a notação de Entidade-Relacionamento (ER), onde as entidades são representadas por retângulos, seus atributos são listados internamente, e os relacionamentos são indicados por linhas conectoras com suas respectivas cardinalidades.
+
+Este documento apresenta duas versões para a modelagem conceitual do banco de dados para o Sistema de Controle e Gerenciamento de Execução de Ordens de Serviço em uma Oficina Mecânica.
+
+- [Diagrama Entidade-Relacionamento sem especializações](#diagrama-entidade-relacionamento-sem-especializaões)
+- [Modelagem Conceitual do Banco de Dados - Com Especializações](#diagrama-entidade-relacionamento---com-especializaões)
+
+
 O modelo foi desenvolvido com base nos requisitos, casos de uso e histórias de usuário previamente documentados.
 
-## Diagrama Entidade-Relacionamento
+## Diagrama Entidade-Relacionamento sem especializações
 
 ```mermaid
 erDiagram
@@ -160,7 +176,7 @@ erDiagram
 - Possibilita a gestão de equipes e especialidades
 - 
 
-# Modelagem Conceitual do Banco de Dados - Com Especializações
+# Diagrama Entidade-Relacionamento - Com Especializações
 
 ```mermaid
 %%{init: {

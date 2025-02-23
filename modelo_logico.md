@@ -12,6 +12,7 @@ A modelagem lógica deve ser utilizada para:
 - Documentar as relações entre as tabelas do sistema
 
 ## Estrutura de Navegação
+- [Diagrama ER](#diagrama-er)
 - [Pessoa](#pessoa)
 - [Cliente](#cliente)
 - [Funcionario](#funcionario)

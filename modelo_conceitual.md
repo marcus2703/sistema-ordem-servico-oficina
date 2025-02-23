@@ -15,8 +15,8 @@ O diagrama apresentado utiliza a notação de Entidade-Relacionamento (ER), onde
 
 Este documento apresenta duas versões para a modelagem conceitual do banco de dados para o Sistema de Controle e Gerenciamento de Execução de Ordens de Serviço em uma Oficina Mecânica.
 
-- [Diagrama Entidade-Relacionamento sem especializações](#diagrama-entidade-relacionamento-sem-especializaões)
-- [Modelagem Conceitual do Banco de Dados - Com Especializações](#diagrama-entidade-relacionamento---com-especializaões)
+- [Diagrama Entidade-Relacionamento sem especializações](#diagrama-entidade-relacionamento-sem-especializa%C3%A7%C3%B5es)
+- [Modelagem Conceitual do Banco de Dados - Com Especializações](#diagrama-entidade-relacionamento---com-especializa%C3%A7%C3%B5es)
 
 
 O modelo foi desenvolvido com base nos requisitos, casos de uso e histórias de usuário previamente documentados.
@@ -175,8 +175,9 @@ erDiagram
 - Controla status de aprovação e execução dos serviços
 - Possibilita a gestão de equipes e especialidades
 - 
+[🔝 Voltar ao topo](#modelagem-conceitual-do-banco-de-dados)
 
-# Diagrama Entidade-Relacionamento - Com Especializações
+## Diagrama Entidade-Relacionamento - Com Especializações
 
 ```mermaid
 %%{init: {
@@ -439,3 +440,5 @@ erDiagram
 4. **Integridade dos Dados**
    - Regras de negócio mais claras
    - Melhor controle de acesso e permissões
+
+[🔝 Voltar ao topo](#modelagem-conceitual-do-banco-de-dados)
